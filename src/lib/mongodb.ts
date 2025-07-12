@@ -1,11 +1,10 @@
 import { MongoClient } from 'mongodb'
 
-// Use a simple, direct connection string - this should work with MongoDB Atlas
-const MONGODB_URI = "mongodb+srv://yvdidejd:ORLTMqdzTC9HtAoI@cluster0.3t2bci6.mongodb.net/Folio?retryWrites=true&w=majority";
-const uri = process.env.MONGODB_URI || MONGODB_URI;
+// Use environment variable only, do not hardcode
+const uri = process.env.MONGODB_URI;
 
 if (!uri) {
-  throw new Error('Invalid/Missing MongoDB connection string.')
+  throw new Error('Invalid/Missing MongoDB connection string. Set MONGODB_URI in your environment variables.')
 }
 
 // Simple options object with timeout settings

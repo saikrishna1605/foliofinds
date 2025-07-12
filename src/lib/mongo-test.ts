@@ -1,15 +1,8 @@
 // This is a test file to check the MongoDB connection directly
 import { MongoClient } from 'mongodb';
 
-// Try multiple connection strings
-const connectionStrings = [
-  // Original connection string with SRV
-  "mongodb+srv://yvdidejd:ORLTMqdzTC9HtAoI@cluster0.3t2bci6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-  // Direct connection without SRV
-  "mongodb://yvdidejd:ORLTMqdzTC9HtAoI@cluster0.3t2bci6.mongodb.net:27017/Folio?retryWrites=true&w=majority",
-  // Another format with replica set
-  "mongodb://yvdidejd:ORLTMqdzTC9HtAoI@cluster0.3t2bci6.mongodb.net:27017,cluster0-shard-00-01.3t2bci6.mongodb.net:27017,cluster0-shard-00-02.3t2bci6.mongodb.net:27017/Folio?replicaSet=atlas-jprvt0-shard-0&ssl=true&authSource=admin"
-];
+// Try multiple connection strings from environment variable only
+const connectionStrings = (process.env.MONGODB_URIS || "").split(",").filter(Boolean);
 
 export async function testMongoConnection() {
   console.log("Testing MongoDB connections...");
