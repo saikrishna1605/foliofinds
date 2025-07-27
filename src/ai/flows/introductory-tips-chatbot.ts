@@ -10,7 +10,6 @@
 
 import { ai } from '../genkit';
 import { z } from 'genkit';
-import { defineFlow } from '@genkit-ai/flow';
 
 const IntroductoryTipsInputSchema = z.object({
   userType: z
@@ -23,7 +22,7 @@ const IntroductoryTipsOutputSchema = z.object({
   tips: z.array(z.string()).describe('Helpful introductory tips for the user.'),
 });
 export type IntroductoryTipsOutput = z.infer<typeof IntroductoryTipsOutputSchema>;
-export const introductoryTipsFlow = defineFlow(
+export const introductoryTipsFlow = ai.defineFlow(
   {
     name: 'introductoryTipsFlow',
     inputSchema: IntroductoryTipsInputSchema,
@@ -52,5 +51,5 @@ Each tip should be 1-2 sentences. Format as a bulleted list.`
 export async function getIntroductoryTips(
   input: IntroductoryTipsInput
 ): Promise<IntroductoryTipsOutput> {
-  return introductoryTipsFlow.run(input);
+  return introductoryTipsFlow(input);
 }

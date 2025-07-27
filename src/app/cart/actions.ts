@@ -5,7 +5,7 @@ import type { Book, Cart, Order } from "@/lib/types";
 import { revalidatePath } from "next/cache";
 import { type WithId, type Document } from "mongodb";
 
-const { NEXT_PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_APP_SECRET, PAYPAL_API_BASE } = process.env;
+const { NEXT_PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_APP_SECRET, PAYPAL_API_BASE = "https://api-m.sandbox.paypal.com" } = process.env;
 
 const serializeCart = (cart: WithId<Document> | null): Cart | null => {
     if (!cart) return null;

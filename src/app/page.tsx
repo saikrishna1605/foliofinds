@@ -3,9 +3,7 @@ import type { Book } from "@/lib/types";
 import clientPromise from "@/lib/mongodb";
 import { getDirectDb } from "@/lib/db-direct"; // Import alternative connection
 import { WithId, Document } from "mongodb";
-import ThreeDModelClientWrapper from "./ThreeDModelClientWrapper"; // Import the 3D model component
-// Temporarily commented out due to compatibility issues with Next.js 15
-// import { HomeModelViewer } from "@/components/home-model-viewer";
+import { HomeModelViewer } from "@/components/home-model-viewer"; // Import the home viewer component
 
 async function getBooks(): Promise<Book[]> {
   try {
@@ -49,9 +47,9 @@ export default async function Home() {
   const books = await getBooks();
   return (
     <>
-      <section className="container py-8 md:py-12">
+      <section className="py-8 md:py-12">
         <div className="mb-8 flex justify-center">
-          <ThreeDModelClientWrapper />
+          <HomeModelViewer />
         </div>
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-6xl font-bold font-headline bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent mb-4">Find Your Next Read</h1>

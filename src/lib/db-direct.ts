@@ -1,7 +1,11 @@
 import { MongoClient } from 'mongodb';
 
-// Hardcoded connection string as a last resort
-const MONGODB_URI = "mongodb://yvdidejd:ORLTMqdzTC9HtAoI@cluster0.3t2bci6.mongodb.net:27017/Folio?retryWrites=true&w=majority";
+// Use environment variable for MongoDB connection
+const MONGODB_URI = process.env.MONGODB_URI || process.env.MONGODB_URIS?.split(',')[0] || '';
+
+if (!MONGODB_URI) {
+  throw new Error('MONGODB_URI environment variable is not set');
+}
 
 // Function to get a database connection directly
 export async function getDirectDb() {
